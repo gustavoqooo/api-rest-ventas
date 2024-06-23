@@ -5,7 +5,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 import lombok.Getter;
 import lombok.Setter;
-import pe.edu.cibertec.apirestventascibertec.model.bd.pk.ProductOrderId;
+import pe.edu.cibertect.api_rest_ventas.model.bd.pk.ProductOrderId;
 
 @Getter
 @Setter

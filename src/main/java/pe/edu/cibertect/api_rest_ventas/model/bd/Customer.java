@@ -2,8 +2,11 @@ package pe.edu.cibertect.api_rest_ventas.model.bd;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
+import lombok.Setter;
 
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "customers")
 public class Customer {

@@ -2,10 +2,13 @@ package pe.edu.cibertect.api_rest_ventas.model.bd;
 
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 @NoArgsConstructor
-@Data
+@Getter
+@Setter
 @Entity
 @Table(name = "categories")
 public class Category {
