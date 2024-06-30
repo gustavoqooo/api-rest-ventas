@@ -1,7 +1,6 @@
 package pe.edu.cibertect.api_rest_ventas.security;
 
-import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwts;
+import io.jsonwebtoken.*;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
@@ -23,6 +22,25 @@ public class FiltroJWTAutorizacion extends OncePerRequestFilter {
     protected void doFilterInternal(HttpServletRequest request,
                                     HttpServletResponse response,
                                     FilterChain filterChain) throws ServletException, IOException {
+        try {
+            if(validarUsoToken(request)){
+                Claims claims = validarToken(request);
+                if(claims.get("authorities") != null){
+                    cargarAutorizaciones(claims);
+                }else{
+                    SecurityContextHolder.clearContext();
+                }
+            }else{
+                SecurityContextHolder.clearContext();
+            }
+            filterChain.doFilter(request, response);
+        }catch (ExpiredJwtException | UnsupportedJwtException | MalformedJwtException ex){
+            response.setStatus(HttpServletResponse.SC_FORBIDDEN);
+            ((HttpServletResponse)response).sendError(
+                    HttpServletResponse.SC_FORBIDDEN,
+                    ex.getMessage()
+            );
+        }
     }
 
     private void cargarAutorizaciones(Claims claims){
