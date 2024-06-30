@@ -11,6 +11,14 @@ import pe.edu.cibertect.api_rest_ventas.service.CategoryService;
 import java.util.ArrayList;
 import java.util.List;
 
+/*
+Habilitando Cross por URL's determinadas
+@CrossOrigin(origins = {"https://cibertec.blackboard.com",
+        "https://intranet.cibertec.edu.pe"})*/
+/*
+Habilitar Cross para todas las URLs delimitando por método HTTP
+@CrossOrigin(origins = "*", methods = {RequestMethod.GET, RequestMethod.POST})
+ */
 @AllArgsConstructor
 @RestController
 @RequestMapping(path = "api/v1/category")
@@ -18,6 +26,9 @@ public class CategoryController {
 
     private CategoryService categoryService;
 
+    /*Habilitando Cross solo para el método listarCategorias
+    @CrossOrigin(origins = {"https://cibertec.blackboard.com",
+            "https://intranet.cibertec.edu.pe"})*/
     @GetMapping("")
     public ResponseEntity<List<Category>> listarCategorias(){
         List<Category> categoryList = new ArrayList<>(categoryService.listarCategorias());
